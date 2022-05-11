@@ -17,11 +17,15 @@ public class MyWorld extends World
     {    
         // Create a new world with 1080 x 720 cells with a cell size of 1x1 pixels.
         super(1080 , 720, 1); 
+        
         DWAGON dwagon = new DWAGON();
         addObject(dwagon, 300, 360);
         
-        PIPE pipe = new PIPE();
-        addObject(pipe, 0, 0);
+        //PIPE pipe = new PIPE();
+        //addObject(pipe, 0, 0);
+        
+        addObject(new PIPE(), 702, 300);
+        addObject(new PIPE(), 1000, 300); 
     }
 }
 

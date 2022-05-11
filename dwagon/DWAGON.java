@@ -8,7 +8,7 @@ import java.lang.Math;
  */
 public class DWAGON extends Actor 
 {
-    double a = 1.00000000001;    //acceleration
+    double a = 1.0001;    //acceleration
     double v;   //velocity
     double x;    //x-value
     boolean pressed_shift = false;
@@ -16,27 +16,32 @@ public class DWAGON extends Actor
     boolean dash_enabled = true;   //enables dash
     static boolean dead = false;
     int t;  //counted ticks
+    GreenfootImage dwagon_down = new GreenfootImage("images/dwagon_Wings_down.png");
+    GreenfootImage dwagon_middle = new GreenfootImage("images/dwagon_Wings_middle.png");
+    GreenfootImage dwagon_up = new GreenfootImage("images/dwagon_Wings_up.png");
     
     /**
      * Act - do whatever the dwagon wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public DWAGON() {
-
+        dwagon_down.scale(dwagon_down.getWidth()/2,dwagon_down.getHeight()/2);
+        dwagon_middle.scale(dwagon_middle.getWidth()/2,dwagon_middle.getHeight()/2);
+        dwagon_up.scale(dwagon_up.getWidth()/2,dwagon_up.getHeight()/2);
     }
     
     public void act() 
     {        
         if (v <= -15) {
-            setImage("dwagon_Wings_down.png");
+            setImage(dwagon_down);
         }
         
         if (v >-15 || v >= 15) {
-            setImage("dwagon_Wings_middle.png");
+            setImage(dwagon_middle);
         }
         
         if (v > 15) {
-            setImage("dwagon_Wings_up.png");
+            setImage(dwagon_up);
         }
         
         v = (v + a);
@@ -65,11 +70,7 @@ public class DWAGON extends Actor
                 count = true;
             }
         }
-        
-        if (isTouching(PIPE.class)) {
-            dead = true;
-        }
-        
+                
         if (isAtEdge()) {  //checks if touched the ground or flew to high
             dead = true;           
         }
@@ -80,22 +81,19 @@ public class DWAGON extends Actor
         
         dead = false;
         
-        //for(PIPE pipe : getWorld().getObjects(PIPE.class)){
-        //    if(Math.abs(pipe.getX() - getX()) == -50){
-        //        if(Math.abs(pipe.getY() + 30 - getY()) > 37){
-        //            dead = true;
-        //        }
-        //    }
-        //}
+        for(PIPE pipe : getWorld().getObjects(PIPE.class)){
+            if(isTouching(PIPE.class)){
+                dash_enabled = false;
+                if(Math.abs(pipe.getY() - getY()) > 50){
+                    dead = true;
+                }
+            }
+            dash_enabled = true;
+        }
     }
-    
-    public boolean touches(Class clss) {
-        Actor actor = getOneObjectAtOffset(0, 0, clss);
-        return actor != null;        
-    }
-    
+        
     private void boost() {
-        v = -30;    //negative velocity for upwards movement
+        v = -25;    //negative velocity for upwards movement
     }
     
     private void dash() {

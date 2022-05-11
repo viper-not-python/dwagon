@@ -19,6 +19,9 @@ public class MyWorld extends World
         super(1080 , 720, 1); 
         DWAGON dwagon = new DWAGON();
         addObject(dwagon, 300, 360);
+        
+        PIPE pipe = new PIPE();
+        addObject(pipe, 0, 0);
     }
 }
 

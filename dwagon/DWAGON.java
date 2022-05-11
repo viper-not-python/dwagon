@@ -14,7 +14,7 @@ public class DWAGON extends Actor
     boolean pressed_shift = false;
     boolean count = false;
     boolean dash_enabled = true;   //enables dash
-    boolean dead = false;
+    static boolean dead = false;
     int t;  //counted ticks
     
     /**
@@ -61,14 +61,31 @@ public class DWAGON extends Actor
                 count = true;
             }
         }
-                
-        if (getY() >= 719 || getY() <= 1) {  //checks if touched the ground or flew to high
+        
+        if (isTouching(PIPE.class)) {
+            dead = true;
+        }
+        
+        if (isAtEdge()) {  //checks if touched the ground or flew to high
             dead = true;           
         }
         
         if (dead == true) { //checks for condition to stop the game
             Greenfoot.stop();   //stops the game
         }
+        
+        //for(PIPE pipe : getWorld().getObjects(PIPE.class)){
+        //    if(Math.abs(pipe.getX() - getX()) == -50){
+        //        if(Math.abs(pipe.getY() + 30 - getY()) > 37){
+        //            dead = true;
+        //        }
+        //    }
+        //}
+    }
+    
+    public boolean touches(Class clss) {
+        Actor actor = getOneObjectAtOffset(0, 0, clss);
+        return actor != null;        
     }
     
     private void boost() {
@@ -77,5 +94,9 @@ public class DWAGON extends Actor
     
     private void dash() {
         setLocation(getX(), getY() + 100);   //downwards movement
+    }
+    
+    public static boolean isAlive(){
+        return !dead;
     }
 }

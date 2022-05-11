@@ -13,6 +13,7 @@ public class DWAGON extends Actor
     double x;    //x-value
     boolean pressed_shift = false;
     boolean count = false;
+    boolean dash_enabled = true;   //enables dash
     int t;  //counted ticks
     
     /**
@@ -42,7 +43,7 @@ public class DWAGON extends Actor
             boost();
         }
         
-        if (pressed_shift == false) {
+        if (pressed_shift == false && dash_enabled == true) {
             if (Greenfoot.isKeyDown("shift")) { //checks state of shift button
                 dash();
                 pressed_shift = true;

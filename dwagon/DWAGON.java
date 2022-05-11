@@ -51,9 +51,7 @@ public class DWAGON extends Actor
                 count = true;
             }
         }
-        
-        System.out.println(getY());
-        
+                
         if (getY() >= 719 || getY() == 0) {  //checks if touched the ground or flew to high
             dead = true;           
         }

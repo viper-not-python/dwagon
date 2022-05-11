@@ -8,9 +8,12 @@ import java.lang.Math;
  */
 public class DWAGON extends Actor 
 {
-    float a;    //acceleration
-    float v;    //velocity
-    float x;    //x-value
+    double a = 1.00000000001;    //acceleration
+    double v;   //velocity
+    double x;    //x-value
+    boolean pressed_shift = false;
+    boolean count = false;
+    int t;  //counted ticks
     
     /**
      * Act - do whatever the dwagon wants to do. This method is called whenever
@@ -18,18 +21,41 @@ public class DWAGON extends Actor
      */
     public void act() 
     {
-        a = 1;
-        v = (v + a);
+        if (a <= 10) {  //setting velocity max
+            v = (v + a * a);
+        }
         
-        setLocation(getX(), getY()+ Math.round(v / 2));
-        a++;
-    }   
+        if (count == true) { 
+            if (t == 60) {  //counts 1 sec
+                pressed_shift = false;  //resets bool pressed_shift
+                count = false; //resets bool count
+                t = 0;
+            }
+            t++;
+        }
+        
+        int vint = (int)v / 5; //converting double to int
+                
+        setLocation(getX(), getY() + vint); //downwards movement
+        
+        if (Greenfoot.isKeyDown("space")) { //checks state of space button
+            boost();
+        }
+        
+        if (pressed_shift == false) {
+            if (Greenfoot.isKeyDown("shift")) { //checks state of shift button
+                dash();
+                pressed_shift = true;
+                count = true;
+            }
+        }
+    }
     
     private void boost() {
-    
+        v = -30;    //negative velocity for upwards movement
     }
     
     private void dash() {
-    
+        setLocation(getX(), getY() + 100);   //downwards movement
     }
 }

@@ -15,6 +15,7 @@ public class DWAGON extends Actor
     boolean count = false;
     boolean dash_enabled = true;   //enables dash
     static boolean dead = false;
+    boolean touching_pipe_old = false;
     int t;  //counted ticks
     GreenfootImage dwagon_down = new GreenfootImage("images/dwagon_Wings_down.png");
     GreenfootImage dwagon_middle = new GreenfootImage("images/dwagon_Wings_middle.png");
@@ -25,14 +26,14 @@ public class DWAGON extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public DWAGON() {
-        dwagon_down.scale(dwagon_down.getWidth()/2,dwagon_down.getHeight()/2);
+        dwagon_down.scale(dwagon_down.getWidth()/2,dwagon_down.getHeight()/2);  //scaling the image
         dwagon_middle.scale(dwagon_middle.getWidth()/2,dwagon_middle.getHeight()/2);
         dwagon_up.scale(dwagon_up.getWidth()/2,dwagon_up.getHeight()/2);
     }
     
     public void act() 
-    {        
-        if (v <= -15) {
+    {                
+        if (v <= -15) { //different images for different velocities
             setImage(dwagon_down);
         }
         
@@ -45,9 +46,26 @@ public class DWAGON extends Actor
         }
         
         v = (v + a);
-                
+        int vint = (int)v / 5; //converting double to int       
+        setLocation(getX(), getY() + vint); //downwards movement
+        
+        boolean touching_pipe = false;
+        
+        for(PIPE pipe : getWorld().getObjects(PIPE.class)){
+            if(Math.abs(pipe.getX() - getX()) < 90){
+                dash_enabled = false;
+                if(Math.abs(pipe.getY() - getY()) > 50){
+                    dead = true;
+                }
+            }
+            dash_enabled = true;
+            touching_pipe = true;
+        }
+        
+        touching_pipe_old = touching_pipe;
+        
         if (count == true) { 
-            if (t == 60) {  //counts 1 sec
+            if (t == 60) {  //counts 1 sec ==> cooldown for dash()
                 pressed_shift = false;  //resets bool pressed_shift
                 count = false; //resets bool count
                 t = 0;
@@ -55,15 +73,11 @@ public class DWAGON extends Actor
             t++;
         }
         
-        int vint = (int)v / 5; //converting double to int
-                
-        setLocation(getX(), getY() + vint); //downwards movement
-        
         if (Greenfoot.isKeyDown("space")) { //checks state of space button
             boost();
         }
         
-        if (pressed_shift == false && dash_enabled == true) {
+        if (pressed_shift == false && dash_enabled == true) {   //checks booleans
             if (Greenfoot.isKeyDown("shift")) { //checks state of shift button
                 dash();
                 pressed_shift = true;
@@ -79,17 +93,7 @@ public class DWAGON extends Actor
             Greenfoot.stop();   //stops the game
         }
         
-        dead = false;
-        
-        for(PIPE pipe : getWorld().getObjects(PIPE.class)){
-            if(isTouching(PIPE.class)){
-                dash_enabled = false;
-                if(Math.abs(pipe.getY() - getY()) > 50){
-                    dead = true;
-                }
-            }
-            dash_enabled = true;
-        }
+        dead = false;     
     }
         
     private void boost() {

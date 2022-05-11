@@ -13,6 +13,7 @@ public class PIPE extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     int j = 0;
+    int k = 0;
     
     public PIPE() {
         GreenfootImage pipes = new GreenfootImage("images/pipes.png");
@@ -23,11 +24,18 @@ public class PIPE extends Actor
     {       
         World world = getWorld();
         
-        if(DWAGON.isAlive()){
+        if (DWAGON.isAlive()){
             setLocation(getX() - 3, getY());
         }
-        if(getX() <= 1){
-            world.addObject(new PIPE(), 702, 250 + Greenfoot.getRandomNumber(250));
+        
+        if (getX() <= 200){
+            if (k == 0) {
+                world.addObject(new PIPE(), 900, 250 + Greenfoot.getRandomNumber(250));
+                k++;
+            }
+        }
+        
+        if (getX() <=1){
             getWorld().removeObject(this);
         }
     }

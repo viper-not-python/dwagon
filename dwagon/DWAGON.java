@@ -23,10 +23,8 @@ public class DWAGON extends Actor
      */
     public void act() 
     {        
-        if (a <= 10) {  //setting velocity max
-            v = (v + a);
-        }
-        
+        v = (v + a);
+                
         if (count == true) { 
             if (t == 60) {  //counts 1 sec
                 pressed_shift = false;  //resets bool pressed_shift
@@ -52,7 +50,7 @@ public class DWAGON extends Actor
             }
         }
                 
-        if (getY() >= 719 || getY() == 0) {  //checks if touched the ground or flew to high
+        if (getY() >= 719 || getY() <= 1) {  //checks if touched the ground or flew to high
             dead = true;           
         }
         

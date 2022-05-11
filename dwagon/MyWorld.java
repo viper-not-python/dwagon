@@ -15,7 +15,7 @@ public class MyWorld extends World
      */
     public MyWorld()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        // Create a new world with 1080 x 720 cells with a cell size of 1x1 pixels.
         super(1080 , 720, 1); 
         DWAGON dwagon = new DWAGON();
         addObject(dwagon, 300, 360);

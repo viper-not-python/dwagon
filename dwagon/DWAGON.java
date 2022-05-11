@@ -23,6 +23,18 @@ public class DWAGON extends Actor
      */
     public void act() 
     {        
+        if (v <= -15) {
+            setImage("dwagon_Wings_down.png");
+        }
+        
+        if (v >-15 || v >= 15) {
+            setImage("dwagon_Wings_middle.png");
+        }
+        
+        if (v > 15) {
+            setImage("dwagon_Wings_up.png");
+        }
+        
         v = (v + a);
                 
         if (count == true) { 

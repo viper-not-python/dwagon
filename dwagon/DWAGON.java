@@ -24,7 +24,7 @@ public class DWAGON extends Actor
     public void act() 
     {        
         if (a <= 10) {  //setting velocity max
-            v = (v + a * a);
+            v = (v + a);
         }
         
         if (count == true) { 

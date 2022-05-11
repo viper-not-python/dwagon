@@ -21,6 +21,10 @@ public class DWAGON extends Actor
      * Act - do whatever the dwagon wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    public DWAGON() {
+
+    }
+    
     public void act() 
     {        
         if (v <= -15) {
@@ -73,6 +77,8 @@ public class DWAGON extends Actor
         if (dead == true) { //checks for condition to stop the game
             Greenfoot.stop();   //stops the game
         }
+        
+        dead = false;
         
         //for(PIPE pipe : getWorld().getObjects(PIPE.class)){
         //    if(Math.abs(pipe.getX() - getX()) == -50){

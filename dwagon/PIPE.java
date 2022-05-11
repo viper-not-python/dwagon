@@ -13,17 +13,17 @@ public class PIPE extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public PIPE() {
-        GreenfootImage pipe_down = new GreenfootImage("images/pipe_down.png");
-        pipe_down.scale(pipe_down.getWidth()/30,pipe_down.getHeight()/25);
-        setImage(pipe_down);
+        GreenfootImage pipes = new GreenfootImage("images/pipes.png");
+        pipes.scale(pipes.getWidth()/2,pipes.getHeight()/2);
+        setImage(pipes);
     }
     public void act()
     {
         if(DWAGON.isAlive()){
-            setLocation(getX() - 2, getY());
+            setLocation(getX() - 3, getY());
         }
         if(getX() <= 1){
-            setLocation(getX() + 700, 720 + Greenfoot.getRandomNumber(500));
+            setLocation(getX() + 700, 250 + Greenfoot.getRandomNumber(250));
         }
     }
 }

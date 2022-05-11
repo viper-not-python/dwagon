@@ -14,6 +14,7 @@ public class DWAGON extends Actor
     boolean pressed_shift = false;
     boolean count = false;
     boolean dash_enabled = true;   //enables dash
+    boolean dead = false;
     int t;  //counted ticks
     
     /**
@@ -21,7 +22,7 @@ public class DWAGON extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
-    {
+    {        
         if (a <= 10) {  //setting velocity max
             v = (v + a * a);
         }
@@ -49,6 +50,16 @@ public class DWAGON extends Actor
                 pressed_shift = true;
                 count = true;
             }
+        }
+        
+        System.out.println(getY());
+        
+        if (getY() >= 719 || getY() == 0) {  //checks if touched the ground or flew to high
+            dead = true;           
+        }
+        
+        if (dead == true) { //checks for condition to stop the game
+            Greenfoot.stop();   //stops the game
         }
     }
     

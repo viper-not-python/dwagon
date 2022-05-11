@@ -1,4 +1,2 @@
 # dwagon
 
-# TODO
--[ ] Test task

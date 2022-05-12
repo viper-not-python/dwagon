@@ -16,12 +16,9 @@ public class MyWorld extends World
     public MyWorld()
     {    
         // Create a new world with 1080 x 720 cells with a cell size of 1x1 pixels.
-        super(1080 , 720, 1); 
+        super(1080 , 720, 1);
         
         addObject(new DWAGON(), 300, 360);
-        
-        //PIPE pipe = new PIPE();
-        //addObject(pipe, 0, 0);
         
         addObject(new PIPE(), 600, 300);
         addObject(new PIPE(), 900, 300); 

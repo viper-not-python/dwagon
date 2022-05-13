@@ -30,7 +30,7 @@ public class PIPE extends Actor
         
         if (getX() <= 200){
             if (k == 0) {
-                world.addObject(new PIPE(), 900, 250 + Greenfoot.getRandomNumber(250));
+                world.addObject(new PIPE(), 1200, 250 + Greenfoot.getRandomNumber(250));
                 k++;
             }
         }

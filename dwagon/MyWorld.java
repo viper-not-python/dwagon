@@ -20,7 +20,7 @@ public class MyWorld extends World
         
         addObject(new DWAGON(), 300, 360);
         
-        addObject(new SCORE(), 1080/2, 720/2);
+        addObject(new SCORE(), 0, 0);
         
         addObject(new PIPE(), 480, 300);
         addObject(new PIPE(), 780, 300);

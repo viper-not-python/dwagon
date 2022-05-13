@@ -116,7 +116,7 @@ public class DWAGON extends Actor
             }
         }
                 
-        if (isAtEdge()) {  //checks if touched the ground or flew to high
+        if (isAtEdge() && STARTSCREEN.dev_mode == false) {  //checks if touched the ground or flew to high
             dead = true;           
         }
         

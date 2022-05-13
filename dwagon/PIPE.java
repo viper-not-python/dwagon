@@ -14,6 +14,7 @@ public class PIPE extends Actor
      */
     int j = 0;
     int k = 0;
+    int xspeed = 3;
     
     public PIPE() {
         GreenfootImage pipes = new GreenfootImage("images/pipes.png");
@@ -24,17 +25,37 @@ public class PIPE extends Actor
     {       
         World world = getWorld();
         
-        if (DWAGON.isAlive()){
-            setLocation(getX() - 3, getY());
+        if (MyWorld.difficulty == 1) {
+            xspeed = 3;
         }
         
+        if (MyWorld.difficulty == 2) {
+            xspeed = 5;
+        }
+        
+        if (MyWorld.difficulty == 3) {
+            xspeed = 7;
+        }
+        
+        if (MyWorld.difficulty == 4) {
+            xspeed = 8;
+        }
+        
+        if (MyWorld.difficulty == 5) {
+            xspeed = 9;
+        }
+        
+        if (DWAGON.isAlive()){
+            setLocation(getX() - xspeed, getY());
+        }
+            
         if (getX() <= 200){
             if (k == 0) {
                 world.addObject(new PIPE(), 1200, 250 + Greenfoot.getRandomNumber(250));
                 k++;
             }
         }
-        
+            
         if (getX() <=1){
             getWorld().removeObject(this);
         }

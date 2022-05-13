@@ -14,10 +14,13 @@ public class DWAGON extends Actor
     double v;   //velocity
     double x;    //x-value
     boolean pressed_shift = false;
-    boolean count = false;
+    boolean pressed_enter = false;
+    boolean count_shift = false;
+    boolean count_enter = false;
     boolean dash_enabled = true;   //enables dash
     static boolean dead = false;
     boolean touching_pipe_old = false;
+    int h;  //counted ticks
     int t;  //counted ticks
     GreenfootImage dwagon_down = new GreenfootImage("images/dwagon_Wings_down.png");
     GreenfootImage dwagon_middle = new GreenfootImage("images/dwagon_Wings_middle.png");
@@ -34,7 +37,7 @@ public class DWAGON extends Actor
     }
     
     public void act() 
-    {              
+    {                      
         if (v <= -15) { //different images for different velocities
             setImage(dwagon_down);
         }
@@ -75,24 +78,41 @@ public class DWAGON extends Actor
             dead = true;
         }
         
-        if (count == true) { 
+        if (count_enter == true) { 
+            if (h == 15) {  //counts 1/4 sec ==> cooldown for dash()
+                pressed_enter = false;  //resets bool pressed_shift
+                count_enter = false; //resets bool count_shift
+                h = 0;
+            }
+            h++;
+        }
+        
+        if (count_shift == true) { 
             if (t == 60) {  //counts 1 sec ==> cooldown for dash()
                 pressed_shift = false;  //resets bool pressed_shift
-                count = false; //resets bool count
+                count_shift = false; //resets bool count_shift
                 t = 0;
             }
             t++;
         }
         
-        if (Greenfoot.isKeyDown("space")) { //checks state of space button
+        if (pressed_enter == false && isAlive() == true) {  //checks booleans
+            if (Greenfoot.isKeyDown("enter")) { //checks state of enter button
+                shoot();
+                pressed_enter = true;
+                count_enter = true;
+            }  
+        }
+        
+        if (Greenfoot.isKeyDown("space") && isAlive() == true) { //checks state of space button
             boost();
         }
         
-        if (pressed_shift == false && dash_enabled == true) {   //checks booleans
+        if (pressed_shift == false && isAlive() == true && dash_enabled == true) {   //checks booleans
             if (Greenfoot.isKeyDown("shift")) { //checks state of shift button
                 dash();
                 pressed_shift = true;
-                count = true;
+                count_shift = true;
             }
         }
                 
@@ -107,6 +127,11 @@ public class DWAGON extends Actor
         dead = false;     
     }
         
+    private void shoot() {
+        World world = getWorld(); //to access WORLD class methods
+        world.addObject(new PROJECTILE(), getX() + 55, getY() + 18);
+    }
+    
     private void boost() {
         v = -25;    //negative velocity for upwards movement
     }

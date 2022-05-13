@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=PROJECTILE
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ PROJECTILE\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=PROJECTILE()
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ collision()
+comment4.params=clss
+comment4.target=boolean\ touch(java.lang.Class)
+comment5.params=a_big
+comment5.target=boolean\ touch(greenfoot.Actor)
+numComments=6

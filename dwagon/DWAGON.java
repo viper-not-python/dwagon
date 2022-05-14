@@ -22,7 +22,6 @@ public class DWAGON extends HITBOX_CHECK
     boolean touching_pipe_old = false;
     int h;  //counted ticks
     int t;  //counted ticks
-    int vchange;    //change of velocity according to difficulty
     int dash;   //change of pixels dashed according to difficulty
     GreenfootImage dwagon_down = new GreenfootImage("images/dwagon_Wings_down.png");
     GreenfootImage dwagon_middle = new GreenfootImage("images/dwagon_Wings_middle.png");
@@ -53,7 +52,7 @@ public class DWAGON extends HITBOX_CHECK
         }
         
         v = (v + a);
-        int vint = (int)v / 5 - vchange / 3; //converting double to int and adding vchange to match difficulty      
+        int vint = (int)v / 5 - MyWorld.vchange / 3; //converting double to int and adding vchange to match difficulty      
         setLocation(getX(), getY() + vint); //downwards movement
         
         boolean touching_pipe = false;
@@ -76,12 +75,16 @@ public class DWAGON extends HITBOX_CHECK
             SCORE.p_score++;
         }
         
+        if(touch(BARRIER.class) == true && STARTSCREEN.dev_mode == false) {
+            dead = true;
+        }
+        
         if(touch(PIPE.class) == true && STARTSCREEN.dev_mode == false){
             dead = true;
         }
         
         if (count_enter == true) { 
-            if (h == 15) {  //counts 1/4 sec ==> cooldown for dash()
+            if (h == 45) {  //counts 3/4 sec ==> cooldown for shoot()
                 pressed_enter = false;  //resets bool pressed_shift
                 count_enter = false; //resets bool count_shift
                 h = 0;
@@ -105,19 +108,7 @@ public class DWAGON extends HITBOX_CHECK
                 count_enter = true;
             }  
         }
-        
-        if (MyWorld.difficulty <= 2){
-            vchange = 0;    //negative velocity change for upwards movement and downward acceleration
-        }
-        
-        if (MyWorld.difficulty == 3){
-            vchange = -5;    //negative velocity change for upwards movement and downward acceleration
-        }
-        
-        if (MyWorld.difficulty == 5){
-            vchange = -7;    //negative velocity change for upwards movement and downward acceleration
-        }
-        
+                
         if (Greenfoot.isKeyDown("space") && isAlive() == true) { //checks state of space button
             boost();
         }
@@ -147,7 +138,7 @@ public class DWAGON extends HITBOX_CHECK
     }
     
     private void boost() {        
-        v = -25 + vchange;
+        v = -25 + MyWorld.vchange;
     }
     
     private void dash() {

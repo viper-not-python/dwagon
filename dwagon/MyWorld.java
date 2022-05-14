@@ -9,6 +9,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MyWorld extends World
 {
     static int difficulty = 1;
+    static int xspeed = 3;
+    static int barrier = 0;
+    static int vchange;    //change of velocity according to difficulty
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -72,6 +75,43 @@ public class MyWorld extends World
             if (Greenfoot.isKeyDown("5")) {
                 difficulty = 5;
             }            
+        }
+        
+        if (MyWorld.difficulty == 1) {  //speed according to difficulty
+            xspeed = 3;
+            barrier = 0;
+        }
+        
+        if (MyWorld.difficulty == 2) {
+            xspeed = 5;
+            barrier = 10;
+        }
+        
+        if (MyWorld.difficulty == 3) {
+            xspeed = 7;
+            barrier = 20;
+        }
+        
+        if (MyWorld.difficulty == 4) {
+            xspeed = 8;
+            barrier = 35;
+        }
+        
+        if (MyWorld.difficulty == 5) {
+            xspeed = 9;
+            barrier = 50;
+        }
+        
+        if (MyWorld.difficulty <= 2){
+            vchange = 0;    //negative velocity change for upwards movement and downward acceleration
+        }
+        
+        if (MyWorld.difficulty == 3){
+            vchange = -5;    //negative velocity change for upwards movement and downward acceleration
+        }
+        
+        if (MyWorld.difficulty == 5){
+            vchange = -7;    //negative velocity change for upwards movement and downward acceleration
         }
     }
 }

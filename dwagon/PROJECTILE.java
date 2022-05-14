@@ -14,9 +14,11 @@ public class PROJECTILE extends HITBOX_CHECK
      * Act - do whatever the PROJECTILE wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
+       
     GreenfootImage projectile = new GreenfootImage("images/projectile.png");
     GreenfootImage projectile_exploded = new GreenfootImage("images/projectile_exploded.png");
+    
+    int count = 0;
     
     public PROJECTILE() {
         projectile.scale(projectile.getWidth()/5,projectile.getHeight()/5);
@@ -26,20 +28,23 @@ public class PROJECTILE extends HITBOX_CHECK
     
     public void act()
     {
-        if (DWAGON.isAlive()){
-            setLocation(getX() + 15, getY());
+        if (count == 0) {
+            if (DWAGON.isAlive()){
+                setLocation(getX() + 15, getY());
+            }
+            
+            if (isAtEdge() == true || touch(PIPE.class)){
+                setImage(projectile_exploded);
+                count = 5;
+            }
         }
-        
-        if (isAtEdge() == true || touch(PIPE.class)){
-            collision();
+        else {
+            if (count == 5) {
+                getWorld().removeObject(this);
+            }
+            else {
+                count ++;
+            }
         }
     }
-    
-    public void collision() {
-        setImage(projectile_exploded);
-        Greenfoot.delay(5);
-        getWorld().removeObject(this);
-    }
-    
-    
 }

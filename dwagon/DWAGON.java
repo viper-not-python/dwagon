@@ -22,6 +22,8 @@ public class DWAGON extends Actor
     boolean touching_pipe_old = false;
     int h;  //counted ticks
     int t;  //counted ticks
+    int vchange;    //change of velocity according to difficulty
+    int dash;   //change of pixels dashed according to difficulty
     GreenfootImage dwagon_down = new GreenfootImage("images/dwagon_Wings_down.png");
     GreenfootImage dwagon_middle = new GreenfootImage("images/dwagon_Wings_middle.png");
     GreenfootImage dwagon_up = new GreenfootImage("images/dwagon_Wings_up.png");
@@ -51,7 +53,7 @@ public class DWAGON extends Actor
         }
         
         v = (v + a);
-        int vint = (int)v / 5; //converting double to int       
+        int vint = (int)v / 5 - vchange / 3; //converting double to int and adding vchange to match difficulty      
         setLocation(getX(), getY() + vint); //downwards movement
         
         boolean touching_pipe = false;
@@ -104,6 +106,18 @@ public class DWAGON extends Actor
             }  
         }
         
+        if (MyWorld.difficulty <= 2){
+            vchange = 0;    //negative velocity change for upwards movement and downward acceleration
+        }
+        
+        if (MyWorld.difficulty == 3){
+            vchange = -5;    //negative velocity change for upwards movement and downward acceleration
+        }
+        
+        if (MyWorld.difficulty == 5){
+            vchange = -7;    //negative velocity change for upwards movement and downward acceleration
+        }
+        
         if (Greenfoot.isKeyDown("space") && isAlive() == true) { //checks state of space button
             boost();
         }
@@ -132,12 +146,24 @@ public class DWAGON extends Actor
         world.addObject(new PROJECTILE(), getX() + 55, getY() + 18);
     }
     
-    private void boost() {
-        v = -25;    //negative velocity for upwards movement
+    private void boost() {        
+        v = -25 + vchange;
     }
     
     private void dash() {
-        setLocation(getX(), getY() + 100);   //downwards movement
+        if (MyWorld.difficulty <= 2){
+            dash = 100;
+        }
+        
+        if (MyWorld.difficulty >= 3 && MyWorld.difficulty < 5){
+            dash = 130;
+        }
+        
+        if (MyWorld.difficulty == 5){
+            dash = 150;
+        }
+        
+        setLocation(getX(), getY() + dash);
     }
     
     public static boolean isAlive(){

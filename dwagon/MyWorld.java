@@ -30,24 +30,48 @@ public class MyWorld extends World
     }
     
     public void act() {
-        if (TICK.ticks == 600) {
-            difficulty = 1;
+        if  (STARTSCREEN.dev_mode == false) {
+            if (TICK.ticks == 600) {
+                difficulty = 1;
+            }
+            
+            if (TICK.ticks == 1200) {
+                difficulty = 2;
+            }
+            
+            if (TICK.ticks == 1800) {
+                difficulty = 3;
+            }
+            
+            if (TICK.ticks == 2400) {
+                difficulty = 4;
+            }
+            
+            if (TICK.ticks == 3000) {
+                difficulty = 5;
+            }
         }
         
-        if (TICK.ticks == 1200) {
-            difficulty = 2;
-        }
-        
-        if (TICK.ticks == 1800) {
-            difficulty = 3;
-        }
-        
-        if (TICK.ticks == 2400) {
-            difficulty = 4;
-        }
-        
-        if (TICK.ticks == 3000) {
-            difficulty = 5;
+        else {
+            if (Greenfoot.isKeyDown("1")) {
+                difficulty = 1;
+            }
+            
+            if (Greenfoot.isKeyDown("2")) {
+                difficulty = 2;
+            }
+            
+            if (Greenfoot.isKeyDown("3")) {
+                difficulty = 3;
+            }
+            
+            if (Greenfoot.isKeyDown("4")) {
+                difficulty = 4;
+            }
+            
+            if (Greenfoot.isKeyDown("5")) {
+                difficulty = 5;
+            }            
         }
     }
 }

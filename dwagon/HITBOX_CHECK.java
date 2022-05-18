@@ -29,45 +29,31 @@ public class HITBOX_CHECK extends Actor
         return false;
     }
     
-    public boolean touch(Actor a_big) {
-        Actor a_small;
-        if(getImage().getWidth()*getImage().getHeight()>a_big.getImage().getHeight()*a_big.getImage().getWidth())
-        //check wich of the pictures of the actors is smaller 
-        {
-            a_small=a_big;
-            a_big=this;     //if the moving object(this-dwagon) is bigger it gets set to a_big 
-                            //the object it´s checking if there is an collison with this object is now a_small  (PIPE)
-        } 
-        else
-                a_small=this;   //if the moving object(this-dwagon) is smaller it gets set to a_small
-                            //the other one is a_big    (PIPE)
-
-        int i_hypot=(int)Math.hypot(a_small.getImage().getWidth(),a_small.getImage().getHeight());
-        //lenght of the diagonal of the smaller object
-
-        GreenfootImage i=new GreenfootImage(i_hypot,i_hypot);   
-        //creates an transparent square with its side length being the length of the diagonal of the smaller object 
-        i.drawImage(a_small.getImage(),i_hypot/2-a_small.getImage().getWidth()/2,i_hypot/2-a_small.getImage().getHeight()/2); 
-        //create a new small image positioned a little inside the original a_small picture  
-        i.rotate(a_small.getRotation());
-        int w=i_hypot;
-        //rotate the newly created picture i the same way a_small is rotated 
-
-        GreenfootImage Ai = a_big.getImage(),
-        i2=new GreenfootImage(i_hypot=(int)Math.hypot(Ai.getWidth(),Ai.getHeight()),i_hypot);
-        i2.drawImage(Ai,i2.getWidth()/2-Ai.getWidth()/2,i2.getHeight()/2-Ai.getHeight()/2); 
-        i2.rotate(a_big.getRotation());
-        Ai=i2;
-        //doing the same to the second bigger picture Ai is the moved version of a_big
-        int
-        x_Offset=a_big.getX()-a_small.getX()-(Ai.getWidth()/2-w/2),
-        y_Offset=a_big.getY()-a_small.getY()-(Ai.getHeight()/2-w/2);
-
-        boolean b = true;
-        for(int yi =Math.max(0,y_Offset); yi<w && yi<i_hypot+y_Offset && b; yi++)
-            for(int xi =Math.max(0,x_Offset); xi<w && xi<i_hypot+x_Offset && b; xi++)
-                if(Ai.getColorAt(xi-x_Offset,yi-y_Offset).getAlpha()>0 && i.getColorAt(xi,yi).getAlpha()>0)
-                    b=false;
-        return !b;
+    public boolean touch(Actor a2) {
+        Actor a1 = this;
+        
+        GreenfootImage a1_Image = a1.getImage();
+        GreenfootImage a2_Image = a2.getImage();
+        
+        int x_offset = a2.getX() - a1.getX();
+        int y_offset = a2.getY() - a1.getY();
+        
+        int x_size = a2_Image.getWidth()/2 + a1_Image.getWidth()/2 - x_offset;
+        int y_size = a2_Image.getHeight()/2 + a1_Image.getHeight()/2 - y_offset;
+        
+        int a1_intersect_top_x = x_offset;
+        int a1_intersect_top_y = Math.max(a2_Image.getHeight() - y_offset, 0);
+        
+        int a2_intersect_top_x = 0;
+        int a2_intersect_top_y = Math.max(y_offset + a1_Image.getHeight()/2 - a2_Image.getHeight()/2, 0);
+        System.out.println(a1_Image.getWidth() + "       " + a2_Image.getWidth());
+        if(a1_intersect_top_x < a1_Image.getWidth())
+        for(int x_check = 0; x_check < x_size; x_check++)
+            for(int y_check = 0; y_check < y_size; y_check++)
+                if(a1_Image.getColorAt(a1_intersect_top_x ,a1_intersect_top_y).getAlpha() > 0)
+                    if(a2_Image.getColorAt(a2_intersect_top_x,a2_intersect_top_y - a2_Image.getHeight()).getAlpha() > 0)
+                        return true;
+        
+        return false;
     }
 }

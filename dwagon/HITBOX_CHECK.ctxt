@@ -6,6 +6,6 @@ comment1.target=void\ act()
 comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ HITBOX_CHECK\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
 comment2.params=clss
 comment2.target=boolean\ touch(java.lang.Class)
-comment3.params=a_big
+comment3.params=a2
 comment3.target=boolean\ touch(greenfoot.Actor)
 numComments=4

@@ -30,10 +30,15 @@ public class MyWorld extends World
         addObject(new PIPE(), 480, 300);
         addObject(new PIPE(), 780, 300);
         addObject(new PIPE(), 1080, 300); 
+        
+        TICK.ticks = 0;
+        
+        SCORE.score = 0;
+        SCORE.p_score = 0;
     }
     
     public void act() {
-        if  (STARTSCREEN.dev_mode == false) {
+        if  (true) {
             if (TICK.ticks == 600) {
                 difficulty = 1;
             }

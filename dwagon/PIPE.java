@@ -42,7 +42,7 @@ public class PIPE extends HITBOX_CHECK
         }
         
         if (Greenfoot.getRandomNumber(99) + 1 <= MyWorld.barrier && barrier_created == false && checked_chance == false) { //generates chance for barrier creation dependent on int barrier
-            world.addObject(new BARRIER(this), getX(), getY());
+            world.addObject(new BARRIER(), getX(), getY());
             barrier_created = true;
             checked_chance = true;
         }

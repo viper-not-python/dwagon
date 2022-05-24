@@ -71,10 +71,6 @@ public class DWAGON extends HITBOX_CHECK
             SCORE.score++;
         }
         
-        if (touching_pipe_old == false || touching_pipe == true || isAlive()) {
-            SCORE.p_score++;
-        }
-        
         if(touch(BARRIER.class) == true && STARTSCREEN.dev_mode == false) {
             dead = true;
         }
@@ -126,7 +122,7 @@ public class DWAGON extends HITBOX_CHECK
         }
         
         if (dead == true) { //checks for condition to stop the game
-            Greenfoot.stop();   //stops the game
+                Greenfoot.setWorld(new GAME_OVER());    //gameover screen
         }
         
         dead = false;     

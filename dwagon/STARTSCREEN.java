@@ -12,11 +12,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class STARTSCREEN extends World
 {
-    static boolean dev_mode = false;
     /**
      * Constructor for objects of class STARTSCREEN.
      * 
      */
+    static boolean dev_mode = false;
+    
     public STARTSCREEN()
     {    
         // Create a new world with 1080 x 720 cells with a cell size of 1x1 pixels.
@@ -33,6 +34,7 @@ public class STARTSCREEN extends World
         }
         
         if(Greenfoot.isKeyDown("space")) {
+            MyWorld.difficulty = 1;
             Greenfoot.setWorld(new MyWorld());
         }
     }

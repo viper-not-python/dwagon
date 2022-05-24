@@ -11,11 +11,11 @@ public class BARRIER extends HITBOX_CHECK
     /**
      * Act - do whatever the BARRIER wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    Actor c_pipe2;
+     */    
+    GreenfootImage barrier_image = new GreenfootImage("images/barrier.png");
     
-    public BARRIER(Actor c_pipe) {
-        c_pipe2 = c_pipe;
+    public BARRIER() {
+        setImage(barrier_image);
     }
     
     public void act()

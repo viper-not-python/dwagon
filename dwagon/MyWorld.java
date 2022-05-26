@@ -35,6 +35,9 @@ public class MyWorld extends World
         
         SCORE.score = 0;
         SCORE.p_score = 0;
+        
+        STARTSCREEN.backgroundMusic.playLoop();
+        STARTSCREEN.backgroundMusic.setVolume(25);
     }
     
     public void act() {

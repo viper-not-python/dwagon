@@ -18,10 +18,15 @@ public class STARTSCREEN extends World
      */
     static boolean dev_mode = false;
     
+    static GreenfootSound backgroundMusic = new GreenfootSound("background_music.mp3");    //background music
+    
     public STARTSCREEN()
     {    
         // Create a new world with 1080 x 720 cells with a cell size of 1x1 pixels.
         super(1080 , 720, 1); 
+        
+        backgroundMusic.playLoop();
+        backgroundMusic.setVolume(25);
     }
     
     public void act() {

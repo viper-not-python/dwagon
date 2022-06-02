@@ -15,7 +15,9 @@ public class PIPE extends HITBOX_CHECK
     int j = 0;
     int k = 0;
     boolean barrier_created = false;
+    boolean coin_created = false;
     boolean checked_chance = false;
+    boolean coin_checked_chance = false;
     
     public PIPE() {
         GreenfootImage pipes = new GreenfootImage("images/pipes.png");
@@ -48,6 +50,15 @@ public class PIPE extends HITBOX_CHECK
         }
         else {
             checked_chance = true;
+        }
+        
+        if (Greenfoot.getRandomNumber(99) + 1 <= MyWorld.coin && coin_created == false && coin_checked_chance == false && barrier_created == false) { //generates chance for barrier creation dependent on int barrier
+            world.addObject(new COIN(), getX(), getY());
+            coin_created = true;
+            coin_checked_chance = true;
+        }
+        else {
+            coin_checked_chance = true;
         }
     }
 }

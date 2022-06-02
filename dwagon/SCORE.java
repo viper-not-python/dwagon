@@ -18,12 +18,14 @@ public class SCORE extends Actor
     public void act() 
     {
         World world = getWorld();
-        world.showText("Score: " + String.valueOf(score), 300, 100);
+        world.showText("Score: " + String.valueOf(score), 1000, 80);
         
         if (h_score <= score) {
             h_score = score;
         }
         
-        world.showText("Highscore: " + String.valueOf(h_score), 300, 150);
+        world.showText("Highscore: " + String.valueOf(h_score), 980, 110);
+        
+        world.showText("Coins: " + String.valueOf(MyWorld.coins_collected),995, 140);
     }    
 }

@@ -11,7 +11,9 @@ public class MyWorld extends World
     static int difficulty = 1;
     static int xspeed = 3;
     static int barrier = 0;
+    static int coin = 50;
     static int vchange;    //change of velocity according to difficulty
+    static int coins_collected = 0;
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -23,9 +25,9 @@ public class MyWorld extends World
         
         addObject(new DWAGON(), 300, 360);
         
-        addObject(new SCORE(), 0, 0);
+        addObject(new SCORE(), 15, 15);
         
-        addObject(new TICK(), 0, 0);
+        addObject(new TICK(), 15, 15);
         
         addObject(new PIPE(), 480, 300);
         addObject(new PIPE(), 780, 300);
@@ -40,25 +42,25 @@ public class MyWorld extends World
         STARTSCREEN.backgroundMusic.setVolume(25);
     }
     
-    public void act() {
-        if  (true) {
-            if (TICK.ticks == 600) {
+    public void act() {      
+        if  (STARTSCREEN.dev_mode == false) {
+            if (TICK.ticks <= 600) {
                 difficulty = 1;
             }
             
-            if (TICK.ticks == 1200) {
+            if (TICK.ticks <= 1200 && TICK.ticks > 600) {
                 difficulty = 2;
             }
             
-            if (TICK.ticks == 1800) {
+            if (TICK.ticks == 1800 && TICK.ticks > 1200) {
                 difficulty = 3;
             }
             
-            if (TICK.ticks == 2400) {
+            if (TICK.ticks == 2400 && TICK.ticks > 1800) {
                 difficulty = 4;
             }
             
-            if (TICK.ticks == 3000) {
+            if (TICK.ticks == 3000 && TICK.ticks > 2400) {
                 difficulty = 5;
             }
         }

@@ -19,7 +19,7 @@ public class DWAGON extends HITBOX_CHECK
     boolean count_enter = false;
     boolean dash_enabled = true;   //enables dash
     static boolean dead = false;
-    boolean touching_pipe_old = false;
+    static boolean win = false; //true if either TICK.ticks == 3600 || SCORE.score >= 3600
     int h;  //counted ticks
     int t;  //counted ticks
     int dash;   //change of pixels dashed according to difficulty
@@ -65,18 +65,22 @@ public class DWAGON extends HITBOX_CHECK
             touching_pipe = true;
         }
         
-        touching_pipe_old = touching_pipe;
+        
         
         if (isAlive()) {    //adds score per act
             SCORE.score++;
         }
         
-        if(touch(BARRIER.class) == true && STARTSCREEN.dev_mode == false) {
+        if (touch(BARRIER.class) == true && STARTSCREEN.dev_mode == false) {
             dead = true;
         }
         
-        if(touch(PIPE.class) == true && STARTSCREEN.dev_mode == false){
+        if (touch(PIPE.class) == true && STARTSCREEN.dev_mode == false){
             dead = true;
+        }
+        
+        if (TICK.ticks == 3600 || SCORE.score >= 3600) {
+            win = true;
         }
         
         if (count_enter == true) { 
@@ -121,8 +125,12 @@ public class DWAGON extends HITBOX_CHECK
             dead = true;           
         }
         
+        if (win == true) {
+            Greenfoot.setWorld(new WIN_SCREEN());
+        }
+        
         if (dead == true) { //checks for condition to stop the game
-                Greenfoot.setWorld(new GAME_OVER());    //gameover screen
+            Greenfoot.setWorld(new GAME_OVER());    //gameover screen
         }
         
         dead = false;     

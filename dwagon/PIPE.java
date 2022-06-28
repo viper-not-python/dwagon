@@ -47,6 +47,9 @@ public class PIPE extends HITBOX_CHECK
             world.addObject(new BARRIER(), getX(), getY());
             barrier_created = true;
             checked_chance = true;
+            GreenfootImage pipes_wood = new GreenfootImage("images/pipes_wood.png");
+            pipes_wood.scale(pipes_wood.getWidth()/2,pipes_wood.getHeight()/2);
+            setImage(pipes_wood);
         }
         else {
             checked_chance = true;
@@ -56,10 +59,15 @@ public class PIPE extends HITBOX_CHECK
             world.addObject(new COIN(), getX(), getY());
             coin_created = true;
             coin_checked_chance = true;
+            GreenfootImage pipes_stone = new GreenfootImage("images/pipes_stone.png");
+            pipes_stone.scale(pipes_stone.getWidth()/2,pipes_stone.getHeight()/2);
+            setImage(pipes_stone);
         }
         else {
             coin_checked_chance = true;
         }
+        
+        
     }
 }
 

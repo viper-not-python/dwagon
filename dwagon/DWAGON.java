@@ -27,6 +27,8 @@ public class DWAGON extends HITBOX_CHECK
     GreenfootImage dwagon_middle = new GreenfootImage("images/dwagon_Wings_middle.png");
     GreenfootImage dwagon_up = new GreenfootImage("images/dwagon_Wings_up.png");
     
+    GreenfootSound firesound = new GreenfootSound("fire.wav");
+    
     /**
      * Act - do whatever the dwagon wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -139,6 +141,8 @@ public class DWAGON extends HITBOX_CHECK
     private void shoot() {
         World world = getWorld(); //to access WORLD class methods
         world.addObject(new PROJECTILE(), getX() + 55, getY() + 18);
+        firesound.setVolume(80);
+        firesound.play();
     }
     
     private void boost() {        

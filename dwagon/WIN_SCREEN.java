@@ -17,5 +17,9 @@ public class WIN_SCREEN extends World
     {    
         // Create a new world with 1080 x 720 cells with a cell size of 1x1 pixels.
         super(1080 , 720, 1); 
+        showText( String.valueOf(MyWorld.coins_collected), 500, 540);
+        
+        showText("nur lizenzfreie, kostenlose Musik wurde benutzt (Quellen: mixkit.co, bensound.com)", 540, 600);
+        
     }
 }

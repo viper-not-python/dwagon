@@ -23,6 +23,7 @@ public class COIN extends HITBOX_CHECK
     GreenfootImage coin_vier = new GreenfootImage("images/coin_vier.png");
     GreenfootImage coin_fuenf = new GreenfootImage("images/coin_fuenf.png");
     GreenfootImage coin_sechs = new GreenfootImage("images/coin_sechs.png");
+    GreenfootSound coin = new GreenfootSound("coin.wav");
     
     public void act()
     {        
@@ -70,7 +71,9 @@ public class COIN extends HITBOX_CHECK
             if (touch(DWAGON.class)) {
                 MyWorld.coins_collected++;
             }
-            SCORE.score = SCORE.score + 100;
+            SCORE.score = SCORE.score + 50;
+            coin.setVolume(60);
+            coin.play();
             getWorld().removeObject(this);
         }
     }

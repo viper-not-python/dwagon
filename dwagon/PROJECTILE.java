@@ -14,7 +14,7 @@ public class PROJECTILE extends HITBOX_CHECK
      * Act - do whatever the PROJECTILE wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-       
+        
     GreenfootImage projectile = new GreenfootImage("images/projectile.png");
     GreenfootImage projectile_exploded = new GreenfootImage("images/projectile_exploded.png");
     

@@ -14,8 +14,8 @@ public class MyWorld extends World
     static int coin = 25;
     static int vchange;    //change of velocity according to difficulty
     static int coins_collected = 0;
-    EGG egg = new EGG();
-    
+    EGG egg_score = new EGG();
+    EGG egg_highscore = new EGG();
     
     /**
      * Constructor for objects of class MyWorld.
@@ -42,7 +42,9 @@ public class MyWorld extends World
         SCORE.score = 0;
         SCORE.p_score = 0;
         
-        addObject(egg, 1070, 80);
+        addObject(egg_score, 1070, 50);
+        addObject(egg_highscore, 1070, 80);
+        
         STARTSCREEN.backgroundMusic.playLoop();
         STARTSCREEN.backgroundMusic.setVolume(25);
     }
@@ -128,8 +130,10 @@ public class MyWorld extends World
         if (MyWorld.difficulty == 5){
             vchange = -7;    //negative velocity change for upwards movement and downward acceleration
         }
-        removeObject(egg);
-        addObject(egg,1070, 80);
+        removeObject(egg_score);
+        removeObject(egg_highscore);
+        addObject(egg_score,1070, 50);
+        addObject(egg_highscore, 1070, 70);
     }
 }
 //That is usually caused by information tags being saved within your sound file.  Use a sound editor and re-save the file without the tags.

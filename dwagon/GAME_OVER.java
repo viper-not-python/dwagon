@@ -22,7 +22,7 @@ public class GAME_OVER extends World
         
         SCORE.score = SCORE.score - 1;
         
-        STARTSCREEN.backgroundMusic.stop();
+        
         
         if (SCORE.score >= SCORE.h_score) {
             showText("GAME OVER", 540, 200);

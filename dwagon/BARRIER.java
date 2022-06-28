@@ -13,7 +13,7 @@ public class BARRIER extends HITBOX_CHECK
      * the 'Act' or 'Run' button gets pressed in the environment.
      */    
     GreenfootImage barrier_image = new GreenfootImage("images/barrier.png");
-    GreenfootSound destroy = new GreenfootSound("destroy.mp3");
+    GreenfootSound destroy = new GreenfootSound("destroy.wav");
     
     public BARRIER() {
         setImage(barrier_image);

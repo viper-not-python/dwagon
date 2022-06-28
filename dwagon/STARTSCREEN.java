@@ -18,7 +18,7 @@ public class STARTSCREEN extends World
      */
     static boolean dev_mode = false;
     
-    static GreenfootSound backgroundMusic = new GreenfootSound("background_music.mp3");    //background music
+    static GreenfootSound backgroundMusic = new GreenfootSound("background_music.wav");    //background music
     
     public STARTSCREEN()
     {    

@@ -26,7 +26,7 @@ public class DWAGON extends HITBOX_CHECK
     GreenfootImage dwagon_down = new GreenfootImage("images/dwagon_Wings_down.png");
     GreenfootImage dwagon_middle = new GreenfootImage("images/dwagon_Wings_middle.png");
     GreenfootImage dwagon_up = new GreenfootImage("images/dwagon_Wings_up.png");
-    
+    GreenfootSound wing_flap = new GreenfootSound("wing_flap.wav");
     GreenfootSound firesound = new GreenfootSound("fire.wav");
     
     /**
@@ -147,6 +147,7 @@ public class DWAGON extends HITBOX_CHECK
     
     private void boost() {        
         v = -25 + MyWorld.vchange;
+        wing_flap.play();
     }
     
     private void dash() {
@@ -159,7 +160,7 @@ public class DWAGON extends HITBOX_CHECK
         }
         
         if (MyWorld.difficulty == 5){
-            dash = 150;
+            dash = 150; 
         }
         
         setLocation(getX(), getY() + dash);

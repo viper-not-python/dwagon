@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MyWorld extends World
 {
     static int difficulty = 1;
+    static int difficulty_old = 1;
     static int xspeed = 3;
     static int barrier = 0;
     static int coin = 25;
@@ -16,6 +17,8 @@ public class MyWorld extends World
     static int coins_collected = 0;
     EGG egg_score = new EGG();
     EGG egg_highscore = new EGG();
+    GreenfootSound levelup = new GreenfootSound("Prime_Propert_levelup.wav");
+    
     
     /**
      * Constructor for objects of class MyWorld.
@@ -40,7 +43,7 @@ public class MyWorld extends World
         TICK.ticks = 0;
         
         SCORE.score = 0;
-        SCORE.p_score = 0;
+        //SCORE.p_score = 0;
         
         addObject(egg_score, 1070, 50);
         addObject(egg_highscore, 1070, 80);
@@ -94,30 +97,36 @@ public class MyWorld extends World
             }            
         }
         
-        if (MyWorld.difficulty == 1) {  //speed according to difficulty
-            xspeed = 3;
+        if (MyWorld.difficulty == 1) {
             barrier = 0;
         }
         
         if (MyWorld.difficulty == 2) {
-            xspeed = 5;
             barrier = 10;
         }
         
         if (MyWorld.difficulty == 3) {
-            xspeed = 7;
             barrier = 20;
         }
         
         if (MyWorld.difficulty == 4) {
-            xspeed = 8;
             barrier = 35;
         }
         
         if (MyWorld.difficulty == 5) {
-            xspeed = 9;
             barrier = 50;
         }
+        
+        if(difficulty != difficulty_old){
+            levelup.setVolume(20);
+            levelup.play();
+            difficulty_old = difficulty;
+        }
+        
+        if(TICK.ticks/400 < 3)
+            xspeed = 3;
+        else 
+            xspeed = TICK.ticks/400;
         
         if (MyWorld.difficulty <= 2){
             vchange = 0;    //negative velocity change for upwards movement and downward acceleration

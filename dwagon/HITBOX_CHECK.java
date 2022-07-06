@@ -24,50 +24,43 @@ public class HITBOX_CHECK extends Actor
             getWorld().getObjects(clss),
         list2 = new ArrayList();
         for(Actor A : list)
-            if(A!=this && intersects(A) && touch(A))
+            if(A!=this  && intersects(A) && touch(A))
                 return true;
         return false;
     }
     
     public boolean touch(Actor a_big) {
+        //check which actor has the smaller Image to reduce workload
         Actor a_small;
-        if(getImage().getWidth()*getImage().getHeight()>a_big.getImage().getHeight()*a_big.getImage().getWidth())
-        //check wich of the pictures of the actors is smaller 
-        {
+        if(getImage().getWidth()*getImage().getHeight()>a_big.getImage().getHeight()*a_big.getImage().getWidth()){
             a_small=a_big;
-            a_big=this;     //if the moving object(this-dwagon) is bigger it gets set to a_big 
-                            //the object it´s checking if there is an collison with this object is now a_small  (PIPE)
+            a_big=this;     
         } 
         else
-                a_small=this;   //if the moving object(this-dwagon) is smaller it gets set to a_small
-                            //the other one is a_big    (PIPE)
+                a_small=this;
+          
+        //topleft coordinate of the image in the main coord system 
+        int topleft_a_small_x = a_small.getX()-(a_small.getImage().getWidth()/2);
+        int topleft_a_small_y = a_small.getY()-(a_small.getImage().getHeight()/2);
 
-        int i_hypot=(int)Math.hypot(a_small.getImage().getWidth(),a_small.getImage().getHeight());
-        //lenght of the diagonal of the smaller object
-
-        GreenfootImage i=new GreenfootImage(i_hypot,i_hypot);   
-        //creates an transparent square with its side length being the length of the diagonal of the smaller object 
-        i.drawImage(a_small.getImage(),i_hypot/2-a_small.getImage().getWidth()/2,i_hypot/2-a_small.getImage().getHeight()/2); 
-        //create a new small image positioned a little inside the original a_small picture  
-        i.rotate(a_small.getRotation());
-        int w=i_hypot;
-        //rotate the newly created picture i the same way a_small is rotated 
-
-        GreenfootImage Ai = a_big.getImage(),
-        i2=new GreenfootImage(i_hypot=(int)Math.hypot(Ai.getWidth(),Ai.getHeight()),i_hypot);
-        i2.drawImage(Ai,i2.getWidth()/2-Ai.getWidth()/2,i2.getHeight()/2-Ai.getHeight()/2); 
-        i2.rotate(a_big.getRotation());
-        Ai=i2;
-        //doing the same to the second bigger picture Ai is the moved version of a_big
-        int
-        x_Offset=a_big.getX()-a_small.getX()-(Ai.getWidth()/2-w/2),
-        y_Offset=a_big.getY()-a_small.getY()-(Ai.getHeight()/2-w/2);
-
-        boolean b = true;
-        for(int yi =Math.max(0,y_Offset); yi<w && yi<i_hypot+y_Offset && b; yi++)
-            for(int xi =Math.max(0,x_Offset); xi<w && xi<i_hypot+x_Offset && b; xi++)
-                if(Ai.getColorAt(xi-x_Offset,yi-y_Offset).getAlpha()>0 && i.getColorAt(xi,yi).getAlpha()>0)
-                    b=false;
-        return !b;
+        //conversion values to get coords of checking point in coord system of a_big 
+        int conv_s_to_b_x = topleft_a_small_x - (a_big.getX()-(a_big.getImage().getWidth()/2));
+        int conv_s_to_b_y = topleft_a_small_y - (a_big.getY()-(a_big.getImage().getHeight()/2));
+        
+        for(int x_check = 0; x_check < (a_small.getImage().getWidth()-1) && (x_check < a_big.getImage().getWidth()-1); x_check++){
+            for(int y_check = 0; y_check < (a_small.getImage().getHeight()-1) && y_check < (a_big.getImage().getHeight()-1); y_check++){
+                if((conv_s_to_b_x + x_check) >= 0 && (conv_s_to_b_y + y_check) >= 0){
+                    if(a_small.getImage().getColorAt(x_check, y_check).getAlpha() > 0){
+                        if((conv_s_to_b_x + x_check) < (a_big.getImage().getWidth()-2) && (conv_s_to_b_x + y_check) < (a_big.getImage().getHeight()-2)){
+                            if(a_big.getImage().getColorAt((x_check + conv_s_to_b_x) , (y_check + conv_s_to_b_y)).getAlpha() > 0)
+                                return true;
+                            //Check each pixel of the smaller image if it is colored and if a pixel of the bigger picture in the same location is colored
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+        
     }
 }

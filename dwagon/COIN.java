@@ -67,13 +67,14 @@ public class COIN extends HITBOX_CHECK
             setLocation(getX() - MyWorld.xspeed, getY());
         }
         
-        if (touch(DWAGON.class) || touch(PROJECTILE.class) || isAtEdge() == true) {
-            if (touch(DWAGON.class)) {
+        if (isTouching(DWAGON.class) || isTouching(PROJECTILE.class) || isAtEdge() == true) {
+            if (isTouching(DWAGON.class)) {
                 MyWorld.coins_collected++;
+                SCORE.score = SCORE.score + 50;
+                coin.setVolume(60);
+                coin.play();
             }
-            SCORE.score = SCORE.score + 50;
-            coin.setVolume(60);
-            coin.play();
+            
             getWorld().removeObject(this);
         }
     }

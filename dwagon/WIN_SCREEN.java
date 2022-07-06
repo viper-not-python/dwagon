@@ -21,5 +21,6 @@ public class WIN_SCREEN extends World
         
         showText("nur lizenzfreie, kostenlose Musik wurde benutzt (Quellen: mixkit.co, bensound.com)", 540, 600);
         
+        System.out.println("1");
     }
 }

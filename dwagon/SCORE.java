@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class SCORE extends Actor
 {
     static int score = 0;
-    static int p_score = 0;
+    //static int p_score = 0;
     static int h_score = 0;
     
     /**

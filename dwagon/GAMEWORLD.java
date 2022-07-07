@@ -34,7 +34,6 @@ public class GAMEWORLD extends World
         TICK.ticks = 0;
         SCORE.score = 0;
         coins_collected = 0;
-        //SCORE.p_score = 0;
         
         addObject(egg_score, 1070, 50);
         addObject(egg_highscore, 1070, 80);
@@ -112,7 +111,7 @@ public class GAMEWORLD extends World
             vchange = -7;   
         
             
-        removeObject(egg_score);        //keeping egg icons on the top layer 
+        removeObject(egg_score);        //keeping egg icons in front
         removeObject(egg_highscore);
         addObject(egg_score,1070, 50);
         addObject(egg_highscore, 1070, 70);

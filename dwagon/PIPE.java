@@ -3,7 +3,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 //handels creation of pipes, coins and barriers 
 public class PIPE extends HITBOX_CHECK
 {
-    //int j = 0;
     int k = 0;   //amount of pipes
     boolean barrier_created = false;
     boolean coin_created = false;

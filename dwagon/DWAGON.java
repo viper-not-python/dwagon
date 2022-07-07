@@ -46,7 +46,7 @@ public class DWAGON extends HITBOX_CHECK
             setImage(dwagon_up);
         
         
-        v_y = (v_y + a);    //
+        v_y = (v_y + a);    //accelerating the dwagon 
         int vint = (int)v_y / 5 - GAMEWORLD.vchange / 3; //converting double to int and adding vchange to match difficulty      
         setLocation(getX(), getY() + vint); //downwards movement
         

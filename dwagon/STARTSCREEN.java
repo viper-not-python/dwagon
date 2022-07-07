@@ -25,5 +25,5 @@ public class STARTSCREEN extends World
         
         if(Greenfoot.isKeyDown("space"))     //start game
             Greenfoot.setWorld(new GAMEWORLD());
-    }
+    } 
 }

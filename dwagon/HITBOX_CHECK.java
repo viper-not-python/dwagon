@@ -41,7 +41,7 @@ public class HITBOX_CHECK extends Actor
             for(int y_check = 0; y_check < (a_small.getImage().getHeight()-1) && y_check < (a_big.getImage().getHeight()-1); y_check++){
                 if((conv_s_to_b_x + x_check) >= 0 && (conv_s_to_b_y + y_check) >= 0){
                     if(a_small.getImage().getColorAt(x_check, y_check).getAlpha() > 0){
-                        if((conv_s_to_b_x + x_check) < (a_big.getImage().getWidth()-2) && (conv_s_to_b_x + y_check) < (a_big.getImage().getHeight()-2)){
+                        if((conv_s_to_b_x + x_check) < (a_big.getImage().getWidth()-1) && (conv_s_to_b_x + y_check) < (a_big.getImage().getHeight()-1)){
                             if(a_big.getImage().getColorAt((x_check + conv_s_to_b_x) , (y_check + conv_s_to_b_y)).getAlpha() > 0)
                                 return true;
                         }

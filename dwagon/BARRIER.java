@@ -19,7 +19,7 @@ public class BARRIER extends HITBOX_CHECK
             setLocation(getX() - GAMEWORLD.xspeed, getY());
         
         
-        if (touch(PROJECTILE.class)) {
+        if (isTouching(PROJECTILE.class)) {
             getWorld().removeObject(this);
             destroy.setVolume(40);
             destroy.play();
